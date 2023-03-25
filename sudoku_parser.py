@@ -1,7 +1,6 @@
 """
 Parses the sudoku_fen string in order to display the appropriate board
 """
-import argparse
 import re
 
 
