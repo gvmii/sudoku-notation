@@ -1,3 +1,5 @@
+""" Turns program into graphical interface """
+
 from gooey import Gooey, GooeyParser
 from sudoku_parser import SudokuBoard
 

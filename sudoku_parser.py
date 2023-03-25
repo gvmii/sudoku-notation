@@ -17,7 +17,8 @@ class SudokuBoard:
                 int(sudoku_fen[:2].lstrip("0")),
                 int(sudoku_fen[2:4].lstrip("0")),
             ]
-            
+
+        # Regex pattern for modifiers 
         pattern = r"([KCGSL]\([wbrd]?\d+\))"
 
         matches = re.findall(pattern, sudoku_fen)
