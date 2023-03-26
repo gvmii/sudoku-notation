@@ -6,7 +6,7 @@ import numpy
 
 class SudokuBoard:
     def __init__(self, sudoku_fen: str):
-        self.sudoku_fen = ""
+        self.sudoku_fen = sudoku_fen
         self.valid_modifiers = ""
         if sudoku_fen == "":
             raise ValueError
