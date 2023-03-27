@@ -11,8 +11,8 @@ class SudokuBoard:
         if sudoku_fen == "":
             raise ValueError
 
-    def get_metadata(self, sudoku_fen: str) -> list:
-        fen_list = sudoku_fen.split("/")
+    def get_metadata(self) -> list:
+        fen_list = self.sudoku_fen.split("/")
         puzzle_name = fen_list.pop(0)
         author_name = fen_list.pop(0)
         puzzle_size = fen_list.pop(0).replace("0", "")
@@ -23,9 +23,15 @@ class SudokuBoard:
         ]
         return metadata
 
-    def get_matrix(self, sudoku_fen: str) -> numpy.ndarray:
-        metadata = self.get_metadata(sudoku_fen)
-        fen_list = sudoku_fen.split("/")[3:]
+    def get_matrix(self) -> numpy.ndarray:
+        metadata = self.get_metadata()
+        fen_list = self.sudoku_fen.split("/")[3:]
         print(f"DIMENSIONS OF THE GRID: {metadata[2]}")
         matrix = numpy.reshape(fen_list, metadata[2])
         return matrix
+
+# Use this code when testing the parser:
+# fen = 'The path/Megumi/0909/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0'
+# board = SudokuBoard(fen)
+# print(board.get_metadata())
+# print(board.get_matrix())
