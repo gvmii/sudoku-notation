@@ -26,7 +26,6 @@ class SudokuBoard:
     def get_matrix(self) -> numpy.ndarray:
         metadata = self.get_metadata()
         fen_list = self.sudoku_fen.split("/")[3:]
-        print(f"DIMENSIONS OF THE GRID: {metadata[2]}")
         matrix = numpy.reshape(fen_list, metadata[2])
         return matrix
 
