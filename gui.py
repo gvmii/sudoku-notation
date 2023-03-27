@@ -48,8 +48,6 @@ class DisplayMatrix:
                       width=line_thickness)
 
         # draw the numbers on the image
-        # FIXME: I have no clue what I did here but it doesn't work anymore.
-        # TypeError: 'SudokuBoard' object is not subscriptable
         for row in range(self.num_of_rows):
             for col in range(self.num_of_cols):
                 num = self.sudoku_board.get_matrix()[row][col]
