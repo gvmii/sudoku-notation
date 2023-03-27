@@ -52,7 +52,7 @@ class DisplayMatrix:
         # TypeError: 'SudokuBoard' object is not subscriptable
         for row in range(self.num_of_rows):
             for col in range(self.num_of_cols):
-                num = self.sudoku_board[row][col]
+                num = self.sudoku_board.get_matrix()[row][col]
                 if num != 0:
                     x = col * cell_size + cell_size // 4
                     y = row * cell_size
