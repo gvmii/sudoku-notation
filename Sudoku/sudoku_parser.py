@@ -29,6 +29,7 @@ class SudokuBoard:
         matrix = numpy.reshape(fen_list, metadata[2])
         return matrix
 
+
 # Use this code when testing the parser:
 # fen = 'The path/Megumi/0909/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0'
 # board = SudokuBoard(fen)

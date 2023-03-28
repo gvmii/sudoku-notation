@@ -1,13 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont
 from sudoku_parser import SudokuBoard
+import getpass
 
 
 class DisplayMatrix:
-    def __init__(self, matrix):
-        # TODO: Fix this mess lol
-        self.sudoku_board = SudokuBoard(
-            'The path/Megumi/0909/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0/0')
-        metadata = self.sudoku_board.get_metadata()
+    def __init__(self, sudoku_fen: str):
+        self.sudoku_board = SudokuBoard(sudoku_fen).get_matrix()
+        metadata = SudokuBoard(sudoku_fen).get_metadata()
         self.HEIGHT, self.WIDTH = 1080, 1080
 
         self.num_of_rows = metadata[2][0]
@@ -26,37 +25,41 @@ class DisplayMatrix:
         image = Image.new("RGB", (self.WIDTH, self.HEIGHT), color="white")
 
         # get the font to use for the numbers
-        font = ImageFont.truetype("fonts/LiberationSans-Regular.ttf",
-                                  cell_size // 2)
+        font = ImageFont.truetype(
+            f"/Users/{getpass.getuser()}/sudoku-notation/fonts/LiberationSans-Regular.ttf",
+            cell_size // 2,
+        )
 
         # create an ImageDraw object
         draw = ImageDraw.Draw(image)
 
         # draw the grid lines
-        line_thickness = max(1,
-                             cell_size // 20)  # adjust line thickness based on cell size
+        line_thickness = max(
+            1, cell_size // 20
+        )  # adjust line thickness based on cell size
         for i in range(self.num_of_rows + 1):
             # horizontal lines
             y = i * cell_size
-            draw.line([(0, y), (self.WIDTH, y)], fill=(0, 0, 0),
-                      width=line_thickness)
+            draw.line([(0, y), (self.WIDTH, y)], fill=(0, 0, 0), width=line_thickness)
 
         for j in range(self.num_of_cols + 1):
             # vertical lines
             x = j * cell_size
-            draw.line([(x, 0), (x, self.HEIGHT)], fill=(0, 0, 0),
-                      width=line_thickness)
+            draw.line([(x, 0), (x, self.HEIGHT)], fill=(0, 0, 0), width=line_thickness)
 
         # draw the numbers on the image
         for row in range(self.num_of_rows):
             for col in range(self.num_of_cols):
-                num = self.sudoku_board.get_matrix()[row][col]
+                num = self.sudoku_board[row][col]
                 if num != 0:
-                    x = col * cell_size + cell_size // 4
-                    y = row * cell_size
-                    draw.text((x, y), str(num), font=font, fill=(0, 0, 0))
+                    # center the number in the cell
+                    x_center = col * cell_size + cell_size // 2
+                    y_center = row * cell_size + cell_size // 2
+                    x, y = draw.textsize(str(num), font=font)
+                    draw.text(
+                        (x_center - x // 2, y_center - y // 2),
+                        str(num),
+                        font=font,
+                        fill=(0, 0, 0),
+                    )
         image.show()
-
-
-x = DisplayMatrix([[1 for i in range(9)] for j in range(9)])
-x.draw_matrix()
