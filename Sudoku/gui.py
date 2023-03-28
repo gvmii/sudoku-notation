@@ -1,6 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
 from sudoku_parser import SudokuBoard
-import getpass
 
 
 class DisplayMatrix:
