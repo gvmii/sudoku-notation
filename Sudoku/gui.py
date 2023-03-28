@@ -25,10 +25,9 @@ class DisplayMatrix:
         image = Image.new("RGB", (self.WIDTH, self.HEIGHT), color="white")
 
         # get the font to use for the numbers
-        font = ImageFont.truetype(
-            f"/Users/{getpass.getuser()}/sudoku-notation/fonts/LiberationSans-Regular.ttf",
-            cell_size // 2,
-        )
+        font = ImageFont.truetype("../fonts/LiberationSans-Regular.ttf",
+                                  cell_size // 2,
+                                  )
 
         # create an ImageDraw object
         draw = ImageDraw.Draw(image)
@@ -40,12 +39,14 @@ class DisplayMatrix:
         for i in range(self.num_of_rows + 1):
             # horizontal lines
             y = i * cell_size
-            draw.line([(0, y), (self.WIDTH, y)], fill=(0, 0, 0), width=line_thickness)
+            draw.line([(0, y), (self.WIDTH, y)], fill=(0, 0, 0),
+                      width=line_thickness)
 
         for j in range(self.num_of_cols + 1):
             # vertical lines
             x = j * cell_size
-            draw.line([(x, 0), (x, self.HEIGHT)], fill=(0, 0, 0), width=line_thickness)
+            draw.line([(x, 0), (x, self.HEIGHT)], fill=(0, 0, 0),
+                      width=line_thickness)
 
         # draw the numbers on the image
         for row in range(self.num_of_rows):
